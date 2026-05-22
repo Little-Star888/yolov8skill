@@ -1,7 +1,12 @@
+<div align="center">
+
 # YOLOv8 Skill
+**Skill Design** · 将 YOLO 从视频采集、自动化标注、训练、预测到实时展示，
+封装为一个完整的 Skill 技能包。通过 AI 自动化，一键生成目标检测工作流。
+
 <img width="3547" height="1182" alt="image" src="https://github.com/user-attachments/assets/eb95bddb-7eb1-4cde-91e8-8d28abd24cdf" />
 
-**Skill Design** · 将 YOLO 从视频采集、自动化标注、训练、预测到实时展示，封装为一个完整的 Skill 技能包。通过 AI 自动化，一键生成目标检测工作流。
+</div>
 
 `yolov8skill` 是一套面向 Agent 的 YOLO 目标检测技能包，把传统 YOLO 项目中的“摄像头采集 → 数据标注 → 模型训练 → 推理预测 → 结果展示”全流程，封装成 AI 可以直接调用的 Skill。一次配置，处处复用。
 
@@ -34,7 +39,7 @@
 ---
 
 ## 📁 项目结构
-
+```text
 yolov8skill/
 ├── skills/
 │   └── yolo-camera-skill/      # Skill 定义文件夹（含 SKILL.md）
@@ -44,6 +49,7 @@ yolov8skill/
 ├── FastSAM-s.pt                # FastSAM 分割权重
 ├── best.pt                     # 自定义训练的最佳模型
 └── README.md
+```
 
 ## 🔧 环境要求
 Python 3.8 或更高版本
@@ -55,43 +61,50 @@ Python 3.8 或更高版本
 ## 📦 安装
 ### 克隆仓库
 
-bash
+```text
 git clone https://github.com/yourusername/yolov8skill.git
 cd yolov8skill
+```
+
 ### 创建虚拟环境（推荐）
 
-bash
+```
 python -m venv venv
 source venv/bin/activate   # Linux/macOS
 venv\Scripts\activate      # Windows
+```
 ### 安装依赖
 
-bash
+```
 pip install ultralytics opencv-python
 ### 下载预训练权重（如未自动下载）
 	首次运行时会自动下载 yolov8s.pt，也可手动下载放到根目录
+```
 
 ## 🚀 快速开始
 ### 摄像头实时检测
 运行以下脚本，即可打开摄像头并进行实时目标检测：
 
-bash
+```
 python capture_from_camera.py
 画面中会实时绘制检测框、类别标签和置信度。按 q 键退出。
+```
 
 ### 使用自定义模型
 将你自己训练好的 best.pt 复制到项目根目录，覆盖原文件，或修改 capture_from_camera.py 中的模型路径：
 
-python
+```
 model = YOLO("path/to/your/best.pt")
+```
 ### 分割模式（FastSAM）
 如需使用分割，在脚本中加载 FastSAM-s.pt：
 
-python
+```
 from ultralytics import FastSAM
 
 model = FastSAM("FastSAM-s.pt")
 results = model(source=0, show=True, conf=0.4, device="cpu")
+```
 
 ## 🤖 Skill 使用方式
 在支持 SKILL.md 格式的 Agent 工具（如 Claude Code、Codex、Trae 等）中，Agent 会自动读取 skills/yolo-camera-skill/ 目录下的 Skill 定义，理解项目结构并执行对应的目标检测任务。
@@ -128,7 +141,7 @@ best.pt	用户在特定数据集上微调后的最佳模型
 ## 📂 数据集格式
 yolo_dataset/ 目录需遵循 YOLO 数据集规范：
 
-text
+```text
 yolo_dataset/
 ├── images/
 │   ├── train/
@@ -137,7 +150,7 @@ yolo_dataset/
 │   ├── train/
 │   └── val/
 └── data.yaml
-
+``` 
 data.yaml 示例：
 
 ```python
@@ -155,11 +168,15 @@ names: ['person', 'bicycle', ...]
  - 模型评估与指标展示（mAP、Precision、Recall）
  - Web 实时推流展示检测结果
  - 多摄像头支持
-### 关于作者
-| 🌐 官网 |www.lscript.cn  |
-| 📺B站 | 査老师并不渣 |
-| 📕 小红书 | 査老师并不渣 |
-| 💬 公众号 | 査哥聊AI |
+
+## 关于作者
+
+| | |
+|:---|:---|
+| 🌐 官网 | [www.lscript.cn](http://www.lscript.cn)|
+| 📺 B站 | [查老师并不渣](https://space.bilibili.com/642180359?spm_id_from=333.337.0.0) |
+| 📕 小红书 | [查老师并不渣](https://www.xiaohongshu.com/user/profile/67698a55000000001802adbc) |
+| 💬 公众号 | 微信搜「查哥聊AI」 |
 
 关于作者
 
